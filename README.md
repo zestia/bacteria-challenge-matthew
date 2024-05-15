@@ -2,6 +2,8 @@
 
 Attempt done using scala framework.
 
+To change starting input please update [Input.txt](input.txt)
+
 ### Usage
 
 This is a normal sbt project. You can compile code with `sbt compile`, run it with `sbt run`, and `sbt console` will start a Scala 3 REPL.
