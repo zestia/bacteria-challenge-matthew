@@ -62,4 +62,43 @@ class BacteriaSuite extends munit.FunSuite {
     assertEquals(expected, actual);
   }
 
+  test("RULE 1 - Any live bacteria cell with fewer than two live neighbours dies, as if caused by under-population") {
+     val test = List[(Int, Int)]((1, 2))
+     val actual = Bacteria.runSimulation(test);
+     assertEquals(Set.empty, actual);
+  }
+
+  test("RULE 2 - Any live bacteria cell with two neighbours lives on to the next generation.") {
+    val test = List[(Int, Int)]((1, 2),(1,3))
+    val actual = Bacteria.runSimulation(test);
+    assertEquals(Set.empty, actual);
+  }
+
+  test("RULE 2 - Any live bacteria cell with three neighbours lives on to the next generation.") {
+    val test = List[(Int, Int)]((1, 2),(1,3), (0,3))
+    val actual = Bacteria.runSimulation(test);
+    assertEquals(true, actual.contains((1,2)));
+  }
+
+  test("RULE 3 - Any live bacteria cell with more than three live neighbours dies, as if by overcrowding") {
+    val test = List[(Int, Int)]((1, 2),(1,3), (0,3))
+    val actual = Bacteria.runSimulation(test);
+    assertEquals(true, actual.contains((1,2)));
+  }
+
+  test("RULE 4 - Any dead bacteria cell with exactly three live neighbours becomes a live bacteria cell, as if by reproduction") {
+    val test = List[(Int, Int)]((1, 2),(1,3), (0,3))
+    val expected = Set((1,2), (1,3), (0,2), (0,3))
+    val actual = Bacteria.runSimulation(test);
+    assertEquals(expected, actual);
+  }
+
+  test("RULE 4 - negative values") {
+    val test = List[(Int, Int)]((0,0),(0,1),(0,2))
+    val expected = Set((1,1), (0,1))
+    val actual = Bacteria.runSimulation(test);
+    assertEquals(expected, actual)  
+    
+  }
+
 }

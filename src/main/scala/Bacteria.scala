@@ -5,9 +5,11 @@ object Bacteria {
     (1, 1), (-1, -1), (1, -1), (-1, 1) // diagonals
   )
 
+  // Get all alive neighbours
   def getNeighbourCount(cell: (Int, Int), liveCells: Set[(Int, Int)]): Int =
     directions.count { case (dx, dy) => liveCells.contains((cell._1 + dx, cell._2 + dy)) }
 
+  // Get all surrounding dead cells of alive cells
   def findDeadNeighbours(liveCells: Set[(Int, Int)]): Set[(Int, Int)] =
     liveCells.flatMap { case (x, y) =>
       directions.map { case (dx, dy) => (x + dx, y + dy) }
